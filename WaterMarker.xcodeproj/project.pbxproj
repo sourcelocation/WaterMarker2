@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE1FD8B7260B652700C92BFD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE1FD8B6260B652700C92BFD /* Credits.rtf */; };
-		CE1FD8BC260B687100C92BFD /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = CE1FD8BB260B687100C92BFD /* MetalPetal */; };
 		CE1FD8BF260B689D00C92BFD /* Overlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1FD8BE260B689D00C92BFD /* Overlayer.swift */; };
+		CE20ED00260C702B00D9FFA6 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20ECFF260C702B00D9FFA6 /* WindowController.swift */; };
+		CE71AF6D260CBB7400F31269 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = CE71AF6C260CBB7400F31269 /* MetalPetal */; };
 		CED99A9C260A5FDD007705E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED99A9B260A5FDD007705E9 /* AppDelegate.swift */; };
 		CED99A9E260A5FDD007705E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED99A9D260A5FDD007705E9 /* ViewController.swift */; };
 		CED99AA0260A5FDE007705E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED99A9F260A5FDE007705E9 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		CE1FD8B6260B652700C92BFD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE1FD8BE260B689D00C92BFD /* Overlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlayer.swift; sourceTree = "<group>"; };
+		CE20ECFF260C702B00D9FFA6 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		CED99A98260A5FDD007705E9 /* WaterMarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterMarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED99A9B260A5FDD007705E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED99A9D260A5FDD007705E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE1FD8BC260B687100C92BFD /* MetalPetal in Frameworks */,
+				CE71AF6D260CBB7400F31269 /* MetalPetal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +72,7 @@
 				CE1FD8A7260B62EF00C92BFD /* Supporting Files */,
 				CED99A9B260A5FDD007705E9 /* AppDelegate.swift */,
 				CED99A9D260A5FDD007705E9 /* ViewController.swift */,
+				CE20ECFF260C702B00D9FFA6 /* WindowController.swift */,
 				CE1FD8BE260B689D00C92BFD /* Overlayer.swift */,
 				CED99A9F260A5FDE007705E9 /* Assets.xcassets */,
 				CED99AA1260A5FDE007705E9 /* Main.storyboard */,
@@ -96,7 +99,7 @@
 			);
 			name = WaterMarker;
 			packageProductDependencies = (
-				CE1FD8BB260B687100C92BFD /* MetalPetal */,
+				CE71AF6C260CBB7400F31269 /* MetalPetal */,
 			);
 			productName = WaterMarker2;
 			productReference = CED99A98260A5FDD007705E9 /* WaterMarker.app */;
@@ -126,7 +129,7 @@
 			);
 			mainGroup = CED99A8F260A5FDD007705E9;
 			packageReferences = (
-				CE1FD8BA260B687100C92BFD /* XCRemoteSwiftPackageReference "MetalPetal" */,
+				CE71AF6B260CBB7400F31269 /* XCRemoteSwiftPackageReference "MetalPetal" */,
 			);
 			productRefGroup = CED99A99260A5FDD007705E9 /* Products */;
 			projectDirPath = "";
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED99A9E260A5FDD007705E9 /* ViewController.swift in Sources */,
+				CE20ED00260C702B00D9FFA6 /* WindowController.swift in Sources */,
 				CED99A9C260A5FDD007705E9 /* AppDelegate.swift in Sources */,
 				CE1FD8BF260B689D00C92BFD /* Overlayer.swift in Sources */,
 			);
@@ -296,9 +300,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WaterMarker/WaterMarker.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 92S6JX27W2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WaterMarker/Info.plist;
@@ -307,7 +312,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exerhythm.WaterMarker;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.exerhythm.watermarker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -320,9 +325,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WaterMarker/WaterMarker.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 92S6JX27W2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WaterMarker/Info.plist;
@@ -331,7 +337,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exerhythm.WaterMarker;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.exerhythm.watermarker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -362,20 +368,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE1FD8BA260B687100C92BFD /* XCRemoteSwiftPackageReference "MetalPetal" */ = {
+		CE71AF6B260CBB7400F31269 /* XCRemoteSwiftPackageReference "MetalPetal" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MetalPetal/MetalPetal";
+			repositoryURL = "https://github.com/MetalPetal/MetalPetal.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.16.0;
+				kind = revision;
+				revision = c0d11a8c5d342697854d14d11f75e8f3def9efe2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE1FD8BB260B687100C92BFD /* MetalPetal */ = {
+		CE71AF6C260CBB7400F31269 /* MetalPetal */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE1FD8BA260B687100C92BFD /* XCRemoteSwiftPackageReference "MetalPetal" */;
+			package = CE71AF6B260CBB7400F31269 /* XCRemoteSwiftPackageReference "MetalPetal" */;
 			productName = MetalPetal;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -165,28 +165,27 @@ extension NSImage {
         return self.cgImage(forProposedRect: nil, context: nil, hints: nil)!
     }
     func writePNG(toURL url: URL) {
-        let alertSuppressionKey = "AlertSuppression"
-        let defaults = UserDefaults.standard
+        var url = url
         
         guard let data = tiffRepresentation, let rep = NSBitmapImageRep(data: data), let imgData = rep.representation(using: .png, properties: [.compressionFactor : NSNumber(floatLiteral: 1.0)]) else {
             return
         }
-        if url.exists, !defaults.bool(forKey: alertSuppressionKey) {
+        if url.exists {
             let alert = NSAlert()
             alert.alertStyle = .warning
             alert.messageText = "File \"\(url.lastPathComponent)\" already exists"
             alert.informativeText = "Would you like to replace the already existing file at \"\(url.path)\"?"
+            alert.addButton(withTitle: "Keep both")
             alert.addButton(withTitle: "Skip")
             alert.addButton(withTitle: "Replace")
             alert.showsSuppressionButton = true
             alert.suppressionButton?.title = "Always replace all files"
             
             let response = alert.runModal()
-            if response == .alertFirstButtonReturn {
+            if response == .alertSecondButtonReturn {
                 return
-            }
-            if let suppressionButton = alert.suppressionButton, suppressionButton.state == .on {
-                defaults.set(true, forKey: alertSuppressionKey)
+            } else if response == .alertFirstButtonReturn {
+                url = url.deletingLastPathComponent().appendingPathComponent(url.deletingPathExtension().lastPathComponent + " with watermark." + url.pathExtension)
             }
         }
         do {
