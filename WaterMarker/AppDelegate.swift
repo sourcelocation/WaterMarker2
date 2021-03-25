@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  WaterMarker2
+//  WaterMarker
 //
 //  Created by Матвей Анисович on 3/23/21.
 //
