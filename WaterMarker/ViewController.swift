@@ -84,7 +84,7 @@ class ViewController: NSViewController {
                 let selectedULRsPreviousCount = self.selectedImageURLs.count
                 self.selectedImageURLs += panel.urls
                 
-                self.tableView.insertRows(at: IndexSet(Array(selectedULRsPreviousCount...self.selectedImageURLs.count - 1)), withAnimation: .slideDown)
+                self.tableView.insertRows(at: IndexSet(selectedULRsPreviousCount...self.selectedImageURLs.count - 1), withAnimation: .slideDown)
                 self.updatePreview()
             }
         })
@@ -105,12 +105,12 @@ class ViewController: NSViewController {
         selectedImageURLs.removeAll()
         previewImageIndex = 0
         self.imageViewPreview.image = nil
-        self.tableView.removeRows(at: IndexSet(Array(0..<count)), withAnimation: .effectFade)
+        self.tableView.removeRows(at: IndexSet(0..<count), withAnimation: .effectFade)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.registerForDraggedTypes([.png,.tiff,.URL])
     }
     func updatePreview() {
         let cgImage = self.renderImage(index: self.previewImageIndex, alpha: selectedAlpha, scaling: selectedScaling)
@@ -118,7 +118,7 @@ class ViewController: NSViewController {
     }
     func renderImage(index:Int, alpha: Double, scaling: Double) -> CGImage? {
         if selectedImageURLs.count < 1 { return nil }
-        let bgImage = selectedImageURLs[index].image!.cgImage
+        guard let bgImage = selectedImageURLs[index].image?.cgImage else { return nil }
         guard let watermark = watermarkImage?.cgImage else { return nil }
         let overlayer = Overlayer()
         let output = overlayer.overlay(bgImage, with: watermark,scaling:scaling, alpha:alpha)
@@ -150,6 +150,21 @@ extension ViewController: NSTableViewDelegate, NSTableViewDataSource {
         self.updatePreview()
         return true
     }
+    func tableView( _ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        if dropOperation == .above {
+            return .copy
+        }
+        return []
+    }
+    func tableView( _ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        guard let items = info.draggingPasteboard.pasteboardItems else { return false }
+        
+        let urls = items.compactMap { $0.propertyList(forType: .fileURL) as? String }.compactMap { URL(string: $0) }
+        print(urls)
+        selectedImageURLs += urls
+        tableView.reloadData()
+        return true
+    }
 }
 
 extension URL {
@@ -166,11 +181,12 @@ extension NSImage {
     }
     func writePNG(toURL url: URL) {
         var url = url
+        let shouldAlwaysReplaceFiles = UserDefaults.standard.bool(forKey: "alwaysReplaceFiles")
         
         guard let data = tiffRepresentation, let rep = NSBitmapImageRep(data: data), let imgData = rep.representation(using: .png, properties: [.compressionFactor : NSNumber(floatLiteral: 1.0)]) else {
             return
         }
-        if url.exists {
+        if url.exists, !shouldAlwaysReplaceFiles {
             let alert = NSAlert()
             alert.alertStyle = .warning
             alert.messageText = "File \"\(url.lastPathComponent)\" already exists"
@@ -182,6 +198,12 @@ extension NSImage {
             alert.suppressionButton?.title = "Always replace all files"
             
             let response = alert.runModal()
+            
+            if let suppressionButton = alert.suppressionButton,
+               suppressionButton.state == .on {
+                UserDefaults.standard.set(true, forKey: "alwaysReplaceFiles")
+            }
+            
             if response == .alertSecondButtonReturn {
                 return
             } else if response == .alertFirstButtonReturn {
